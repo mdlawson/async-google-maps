@@ -10,7 +10,7 @@ var fakeGoogle = require('./helpers/fake-google-maps.js'),
     sinon = require('sinon'),
 
     EXPECTED_GLOBAL_CALLBACK = 'mapLoaded',
-    EXPECTED_URL_TEMPLATE = '//maps.googleapis.com/maps/api/js?v={VERSION}&key={KEY}&callback={CALLBACK}',
+    EXPECTED_URL_TEMPLATE = '//maps.googleapis.com/maps/api/js?v={VERSION}&key={KEY}&libraries=&{LIBRARIES}callback={CALLBACK}',
 
     sandbox,
 
@@ -18,6 +18,7 @@ var fakeGoogle = require('./helpers/fake-google-maps.js'),
 
     expectedVersion,
     expectedKey,
+    expectedLibraries,
     expectedUrl,
     loadOptions,
     fakeMapOptions,
@@ -64,9 +65,11 @@ function defineFakeData() {
 
     expectedVersion = '3.20';
     expectedKey = 'somekey';
+    expectedLibraries = [].join(',');
     expectedUrl = EXPECTED_URL_TEMPLATE
         .replace('{VERSION}', expectedVersion)
         .replace('{KEY}', expectedKey)
+        .replace('{LIBRARIES}', expectedLibraries)
         .replace('{CALLBACK}', EXPECTED_GLOBAL_CALLBACK);
 
     loadOptions = {
